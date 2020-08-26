@@ -24,7 +24,7 @@ app.use(helmet({ hsts: false }));
 app.use(csurf({
   cookie: {
     secure: process.env.NODE_ENV === 'production',
-    sameSite: true,
+    sameSite: process.env.NODE_ENV === 'production',
     httpOnly: true
   }
 }));
