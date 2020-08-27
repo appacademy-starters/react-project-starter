@@ -15,8 +15,12 @@ function UsersList (props) {
         fetchData();
     }, []);
 
+    const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
-        users.map((user) => <User key={user.id} user={user} />)
+        <>
+            <h1>User List: </h1>
+            {userComponents}
+        </>
         );
 }
 
