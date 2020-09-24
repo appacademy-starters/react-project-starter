@@ -7,27 +7,38 @@
 const app = require('../app');
 const debug = require('debug')('starter:server');
 const http = require('http');
+const db = require("../db/models");
+const config = require("../config");
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '5000');
+const port = normalizePort(config.port || '5000');
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
-
 const server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on("error", onError);
+server.on("listening", onListening);
+
+db.sequelize
+  .authenticate()
+  .then(() => {
+    debug("Connected to database successfully");
+    server.listen(port);
+  })
+  .catch(() => {
+    console.error("Error connecting to database");
+    process.exit(1);
+  });
 
 /**
  * Normalize a port into a number, string, or false.
