@@ -24,6 +24,7 @@ router.post(
       maxAge: expiresIn * 1000, // maxAge in milliseconds
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production",
     });
     return res.json({
       user,
