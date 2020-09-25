@@ -20,13 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
 // Security Middleware
-if (process.env.NODE_ENV === 'production') {
-  // require https
-  app.use(helmet({ hsts: false }));
-} else {
-  // enable CORS only in development
+if (process.env.NODE_ENV !== 'production') {
+  // enable cors only in development
   app.use(cors());
 }
+// helmet helps set a variety of headers to better secure your app
+app.use(helmet());
 app.use(
   csurf({
     cookie: {

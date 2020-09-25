@@ -31,7 +31,8 @@ router.put(
       res.cookie("token", token, {
         maxAge: expiresIn * 1000, // maxAge in milliseconds
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production"
+        secure: process.env.NODE_ENV === "production",
+        sameSite: process.env.NODE_ENV === "production",
       });
       return res.json({
         user,
