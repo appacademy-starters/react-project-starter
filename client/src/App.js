@@ -1,28 +1,30 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route, NavLink } from 'react-router-dom';
-
-import UserList from './components/UsersList';
-
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  // Check to see if there is a user logged in before loading the application
+  useEffect(() => {
+    const loadUser = async () => {
+      const res = await fetch("/api/session");
+      if (res.ok) {
+        res.data = await res.json(); // current user info
+        console.log(res.data);
+        // if using Redux, add current user info to the store
+      }
+      setLoading(false);
+    }
+    loadUser();
+  }, []);
+
+  if (loading) return null;
 
   return (
     <BrowserRouter>
-        <nav>
-            <ul>
-                <li><NavLink to="/" activeClass="active">Home</NavLink></li>
-                <li><NavLink to="/users" activeClass="active">Users</NavLink></li>
-            </ul>
-        </nav>
-        <Switch>
-            <Route path="/users">
-                <UserList />
-            </Route>
-
-            <Route path="/">
-                <h1>My Home Page</h1>
-            </Route>
-        </Switch>
+      <Route path="/">
+        <h1>My Home Page</h1>
+      </Route>
     </BrowserRouter>
   );
 }
