@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext } from 'react';
 
 import User from './User';
 
@@ -13,7 +13,6 @@ function UsersList (props) {
         }
         fetchData();
     }, []);
-
     const userComponents = users.map((user) => <User key={user.id} user={user} />)
     return (
         <>

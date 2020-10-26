@@ -12,6 +12,7 @@ from starter_app.config import Config
 app = Flask(__name__)
 
 app.config.from_object(Config)
+CSRFProtect(app)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 db.init_app(app)
 
@@ -34,3 +35,6 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_static_file('favicon.ico')
     return app.send_static_file('index.html')
+@app.route('/api/csrf/restore')
+def restore_csrf():
+    return {'csrf_token': generate_csrf()}
