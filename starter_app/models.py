@@ -1,11 +1,12 @@
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import create_access_token, get_jwt_identity
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -31,4 +32,4 @@ class User(db.Model):
     @classmethod
     def authenticate(cls, username, password):
         user = cls.query.filter(User.username == username).scalar()
-        return check_password_hash(user.password_digest, password)
+        return check_password_hash(user.password_digest, password), user

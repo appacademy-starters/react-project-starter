@@ -12,6 +12,12 @@ function App() {
     const authContextValue = {
         fetchWithCSRF,
     };
+    const logoutUser = async ()=> {
+            const response = await fetch('/logout', {
+                method: 'GET',
+                credentials: 'include'
+            });
+    }
     useEffect(() => {
         async function restoreCSRF() {
             const response = await fetch('/api/csrf/restore', {
@@ -45,6 +51,7 @@ function App() {
                 <ul>
                     <li><NavLink to="/" activeclass="active">Home</NavLink></li>
                     <li><NavLink to="/login" activeclass="active">Login</NavLink></li>
+                    <li><a onClick={logoutUser} href="#" activeclass="active">Logout</a></li>
                     <li><NavLink to="/users" activeclass="active">Users</NavLink></li>
                 </ul>
             </nav>

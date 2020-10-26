@@ -25,6 +25,7 @@ Flask-JWT-Extended = "==3.24.1"
 pytest = "*"
 flask-security-too = "*"
 flask-bcrypt = "*"
+flask-inputs = "*"
 
 [requires]
 python_version = "3.8"
