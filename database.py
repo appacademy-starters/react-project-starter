@@ -8,12 +8,12 @@ with app.app_context():
   db.drop_all()
   db.create_all()
 
-  ian = User(username = 'Ian', email = 'ian@aa.io')
-  javier = User(username = 'Javier', email = 'javier@aa.io')
-  dean = User(username = 'Dean', email = 'dean@aa.io')
-  angela = User(username = 'Angela', email = 'angela@aa.io')
-  soonmi = User(username = 'Soon-Mi', email = 'soonmi@aa.io')
-  alissa = User(username = 'Alissa', email = 'alissa@aa.io')
+  ian = User(username = 'ian', email = 'ian@aa.io', password="password")
+  javier = User(username = 'javier', email = 'javier@aa.io', password="password")
+  dean = User(username = 'dean', email = 'dean@aa.io', password="password")
+  angela = User(username = 'angela', email = 'angela@aa.io', password="password")
+  soonmi = User(username = 'soon-mi', email = 'soonmi@aa.io', password="password")
+  alissa = User(username = 'alissa', email = 'alissa@aa.io', password="password")
 
   db.session.add(ian)
   db.session.add(javier)
