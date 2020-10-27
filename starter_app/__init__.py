@@ -4,11 +4,6 @@ from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
 from flask_login import LoginManager, current_user, login_user, logout_user, login_required
 
-from flask_jwt_extended import (
-    JWTManager, jwt_required, create_access_token,
-    get_jwt_identity
-)
-
 from starter_app.models import db, User
 from starter_app.api.user_routes import user_routes
 from starter_app.api.auth_routes import auth_routes
@@ -19,7 +14,6 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 db.init_app(app)
-jwt = JWTManager(app)
 login_manager = LoginManager(app)
 
 # Application Security
@@ -41,27 +35,9 @@ def react_root(path):
 
 @app.route('/api/csrf/restore')
 def restore_csrf():
-    return {'csrf_token': generate_csrf()}
+    id = current_user.id if current_user.is_authenticated else None
+    return {'csrf_token': generate_csrf(), "current_user_id": id}
 
-
-# @app.route('/login', methods=['POST'])
-# def login(response):
-#     if not request.is_json:
-#         return jsonify({"msg": "Missing JSON in request"}), 400
-
-#     username = request.json.get('username', None)
-#     password = request.json.get('password', None)
-
-#     if not username or not password:
-#         return {"errors": ["Missing required parameters"]}, 400
-
-#     authenticated = User.authenticate(username, password)
-#     if authenticated:
-#         access_token = create_access_token(identity=username)
-#         response.set_cookie('token', access_token)
-#         return {"access_token": access_token}, 200
-
-#     return {"errors": ["Invalid username or password"]}, 401
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
