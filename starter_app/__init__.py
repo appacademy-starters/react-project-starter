@@ -2,7 +2,13 @@ import os
 from flask import Flask, render_template, request, session
 from flask_cors import CORS
 from flask_wtf.csrf import CSRFProtect, generate_csrf
-from flask_login import LoginManager, current_user, login_user, logout_user, login_required
+from flask_login import (
+    LoginManager,
+    current_user,
+    login_user,
+    logout_user,
+    login_required
+)
 
 from starter_app.models import db, User
 from starter_app.api.user_routes import user_routes
@@ -20,9 +26,11 @@ login_manager = LoginManager(app)
 CORS(app)
 CSRFProtect(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
+
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
