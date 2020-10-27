@@ -13,7 +13,7 @@ function UserForm(props) {
     const submitForm = (e) => {
         e.preventDefault();
 
-        async function loginUser() {
+        async function updateUser() {
             const response = await fetchWithCSRF(`/api/users/${id}`, {
                 method: 'POST',
                 headers: {
@@ -31,7 +31,7 @@ function UserForm(props) {
                 setErrors(responseData.errors);
             }
         }
-        loginUser();
+        updateUser();
     }
     return (
         <form onSubmit={submitForm}>
