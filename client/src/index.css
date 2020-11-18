@@ -1,1 +1,11 @@
 /* TODO Add site wide styles */
+.image {
+    height: 50px;
+    width: 50px;
+
+}
+.image > img {
+    width: 100%;
+    border-radius: 50px;
+    border: 2px solid #808080;
+}

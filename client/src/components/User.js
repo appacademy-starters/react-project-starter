@@ -4,6 +4,7 @@ import React from 'react';
 function User(props) {
     return (
         <>
+            <div className="image"><img src="/images/benny.png" /></div>
             <strong>Username:</strong> {props.user.username}<br />
             <strong>Email:</strong> {props.user.email}<br />
             <hr />
