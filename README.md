@@ -18,15 +18,14 @@ This is the backend for the Solo React project.
 
 ## Deploy to Heroku
 
-1. Create a new project
-2. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-3. Run `$ heroku login`
-4. Run `$ heroku apps:create <name of app>`
-5. Run `$ heroku addons:create heroku-postgresql`
-6. Run `$ heroku config:set NODE_ENV=production`
-7. Run `$ heroku container:push web`
-8. Run `$ heroku container:release web`
-9. Connect to the heroku shell and prepare your database
+1. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
+2. Run `$ heroku login`
+3. Run `$ heroku apps:create <name of app>`
+4. Run `$ heroku addons:create heroku-postgresql`
+5. Run `$ heroku config:set NODE_ENV=production`
+6. Run `$ heroku container:push web`
+7. Run `$ heroku container:release web`
+8. Connect to the heroku shell and prepare your database
 
 ```bash
   $ heroku run bash
